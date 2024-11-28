@@ -1,0 +1,20 @@
+# Write your MySQL query statement below
+SELECT 
+    IF(
+        COUNT(*) > 1, 
+        IF(
+            (SELECT salary FROM Employee ORDER BY salary DESC LIMIT 1) = 
+            (SELECT salary FROM Employee ORDER BY salary DESC LIMIT 1 OFFSET 1)
+            AND
+            COUNT(*) >= 2,
+            (SELECT salary FROM Employee ORDER BY salary DESC LIMIT 1 OFFSET 2),
+            IF(
+            (SELECT salary FROM Employee ORDER BY salary DESC LIMIT 1) = 
+            (SELECT salary FROM Employee ORDER BY salary DESC LIMIT 1 OFFSET 1),
+            NULL,
+            (SELECT salary FROM Employee ORDER BY salary DESC LIMIT 1 OFFSET 1)
+            )
+        ),
+        NULL
+    ) AS SecondHighestSalary
+FROM Employee;
