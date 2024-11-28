@@ -1,4 +1,5 @@
 # Write your MySQL query statement below
+# if(condition, if condition becomes true then this block will execute, if condition becomes false then this block will execute)
 SELECT 
     IF(
         COUNT(*) > 1, 
